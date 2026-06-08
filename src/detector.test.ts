@@ -28,4 +28,22 @@ describe('isCourseAvailable', () => {
     const html = `<p>Aquarellkurs für Einsteiger</p>`;
     expect(isCourseAvailable(html)).toBe(false);
   });
+
+  it('returns false when status-info says "Anmeldung auf Warteliste"', () => {
+    const html = `
+      <h3>Drehen an der Töpferscheibe</h3>
+      <p>Für AnfängerInnen und Fortgeschrittene</p>
+      <span class="status-info ">Anmeldung auf Warteliste</span>
+    `;
+    expect(isCourseAvailable(html)).toBe(false);
+  });
+
+  it('returns true when status-info says "Anmeldung möglich"', () => {
+    const html = `
+      <h3>Drehen an der Töpferscheibe</h3>
+      <p>Für AnfängerInnen und Fortgeschrittene</p>
+      <span class="status-info ">Anmeldung möglich</span>
+    `;
+    expect(isCourseAvailable(html)).toBe(true);
+  });
 });
